@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEY. YOU. 🀄</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fredoka:wght@500;600;700&display=swap');
+
+  :root {
+    --cream: #fff8ea;
+    --pink: #ffd7e3;
+    --hotpink: #ff6f9f;
+    --sage: #cfe5d0;
+    --green: #6d9a75;
+    --red: #d95d5d;
+    --ink: #302b32;
+    --white: #fffdf8;
+    --shadow: 0 10px 0 rgba(48,43,50,.12);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at 10% 10%, rgba(255,215,227,.8) 0 45px, transparent 46px),
+      radial-gradient(circle at 90% 25%, rgba(207,229,208,.8) 0 55px, transparent 56px),
+      var(--cream);
+    color: var(--ink);
+    font-family: "DM Sans", sans-serif;
+    overflow-x: hidden;
+  }
+
+  .page {
+    width: min(760px, 92vw);
+    margin: auto;
+    padding: 34px 0 70px;
+  }
+
+  .sticker {
+    position: fixed;
+    z-index: 5;
+    font-size: 26px;
+    animation: float 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .s1 { top: 9%; left: 4%; }
+  .s2 { top: 23%; right: 4%; animation-delay: .8s; }
+  .s3 { top: 66%; left: 3%; animation-delay: 1.5s; }
+  .s4 { top: 78%; right: 3%; animation-delay: .3s; }
+
+  .card {
+    background: rgba(255,253,248,.9);
+    border: 3px solid var(--ink);
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+    padding: clamp(28px, 6vw, 58px);
+    margin: 24px 0;
+    position: relative;
+  }
+
+  .hero {
+    min-height: 84vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .tiny {
+    display: inline-block;
+    background: var(--sage);
+    border: 2px solid var(--ink);
+    padding: 7px 13px;
+    border-radius: 999px;
+    font-weight: 700;
+    transform: rotate(-2deg);
+    margin-bottom: 18px;
+  }
+
+  h1, h2, h3 {
+    font-family: "Fredoka", sans-serif;
+    margin: 0;
+    line-height: .98;
+  }
+
+  h1 {
+    font-size: clamp(58px, 14vw, 112px);
+    letter-spacing: -4px;
+  }
+
+  h2 {
+    font-size: clamp(42px, 9vw, 70px);
+  }
+
+  .pink { color: var(--hotpink); }
+  .green { color: var(--green); }
+
+  .subtitle {
+    font-size: clamp(18px, 4vw, 25px);
+    font-weight: 700;
+    margin: 22px auto 8px;
+    max-width: 580px;
+  }
+
+  .scribble {
+    margin: 14px auto 28px;
+    max-width: 470px;
+    font-size: 15px;
+    line-height: 1.6;
+    transform: rotate(1deg);
+  }
+
+  .tile-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 28px 0;
+    flex-wrap: wrap;
+  }
+
+  .tile {
+    width: 55px;
+    height: 68px;
+    background: var(--white);
+    border: 3px solid var(--ink);
+    border-radius: 9px;
+    display: grid;
+    place-items: center;
+    font-size: 31px;
+    box-shadow: 0 5px 0 rgba(48,43,50,.12);
+    transform: rotate(var(--r));
+  }
+
+  .scroll {
+    display: inline-block;
+    margin-top: 22px;
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 700;
+    border-bottom: 3px solid var(--hotpink);
+    padding-bottom: 4px;
+  }
+
+  .details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .detail {
+    border: 2px dashed var(--ink);
+    border-radius: 18px;
+    padding: 18px;
+    background: #fff;
+  }
+  .detail strong { display:block; font-family:"Fredoka"; font-size:20px; margin-bottom:5px; }
+
+  .question {
+    text-align: center;
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .question p {
+    font-size: 19px;
+    margin: 18px auto 30px;
+    max-width: 530px;
+    line-height: 1.55;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 520px;
+    margin: auto;
+  }
+
+  button {
+    border: 3px solid var(--ink);
+    border-radius: 18px;
+    padding: 18px 20px;
+    font: 700 18px "DM Sans";
+    cursor: pointer;
+    box-shadow: 0 7px 0 rgba(48,43,50,.15);
+    transition: transform .12s, box-shadow .12s;
+  }
+  button:hover { transform: translateY(-3px) rotate(-.5deg); box-shadow: 0 10px 0 rgba(48,43,50,.15); }
+  button:active { transform: translateY(4px); box-shadow: 0 3px 0 rgba(48,43,50,.15); }
+
+  .yes { background: var(--pink); }
+  .no { background: var(--sage); }
+
+  .result {
+    display: none;
+    text-align: center;
+  }
+  .result.show { display:block; animation: pop .5s ease both; }
+
+  .result .big {
+    font-family: "Fredoka";
+    font-size: clamp(48px, 11vw, 82px);
+    line-height: .95;
+    margin-bottom: 18px;
+  }
+
+  .result p {
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 540px;
+    margin: 12px auto;
+  }
+
+  .back {
+    background: var(--white);
+    margin-top: 24px;
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 13px;
+    opacity: .7;
+    padding: 25px;
+  }
+
+  .confetti {
+    position: fixed;
+    top: -20px;
+    z-index: 99;
+    pointer-events: none;
+    animation: fall linear forwards;
+    font-size: 20px;
+  }
+
+  .dramatic {
+    animation: shake .45s ease;
+  }
+
+  @keyframes float {
+    0%,100% { transform: translateY(0) rotate(-4deg); }
+    50% { transform: translateY(-12px) rotate(5deg); }
+  }
+  @keyframes pop {
+    0% { opacity:0; transform: scale(.85) rotate(-2deg); }
+    70% { transform: scale(1.03) rotate(1deg); }
+    100% { opacity:1; transform:scale(1) rotate(0); }
+  }
+  @keyframes shake {
+    0%,100% { transform:translateX(0); }
+    20% { transform:translateX(-9px); }
+    40% { transform:translateX(9px); }
+    60% { transform:translateX(-6px); }
+    80% { transform:translateX(6px); }
+  }
+  @keyframes fall {
+    to { transform: translateY(110vh) rotate(720deg); opacity:0; }
+  }
+
+  @media (max-width: 560px) {
+    .details { grid-template-columns: 1fr; }
+    .sticker { display:none; }
+    .card { border-radius: 22px; }
+  }
+</style>
+</head>
+<body>
+  <div class="sticker s1">♡</div>
+  <div class="sticker s2">✦</div>
+  <div class="sticker s3">🀄</div>
+  <div class="sticker s4">૮ ˶ᵔ ᵕ ᵔ˶ ა</div>
+
+  <main class="page">
+    <section class="card hero">
+      <span class="tiny">a limited invitation ✨</span>
+      <h1>hey,<br><span class="pink">you!</span></h1>
+      <p class="subtitle">you have been graced with this limited invitation.</p>
+      <p class="scribble">
+        not to make you feel special or anything,<br>
+        but you are ✨<strong>one of the #orangmantep</strong>✨
+      </p>
+
+      <div class="tile-row" aria-label="Mahjong tiles">
+        <div class="tile" style="--r:-7deg">🀄</div>
+        <div class="tile" style="--r:4deg">🀆</div>
+        <div class="tile" style="--r:-3deg">🀅</div>
+        <div class="tile" style="--r:8deg">🀙</div>
+      </div>
+
+      <a class="scroll" href="#details">okay fine, tell me more ↓</a>
+    </section>
+
+    <section class="card" id="details">
+      <span class="tiny">WHEN. WHERE. WHY. 🀄</span>
+      <h2>Board Game<br><span class="green">Day</span></h2>
+
+      <div class="details">
+        <div class="detail">
+          <strong>📅 WHEN</strong>
+          August 16, 2026 · 11 AM
+        </div>
+        <div class="detail">
+          <strong>📍 WHERE</strong>
+          In front of North Lobby,<br>Pakubuwono Terrace
+        </div>
+        <div class="detail">
+          <strong>👕 DRESS CODE</strong>
+          Your comfiest outfit<br>and your best vibes
+        </div>
+      </div>
+        <div class="detail">
+          <strong>⏰ WHAT TIME</strong>
+          11:00 AM
+        </div>
+        <div class="detail">
+          <strong>📍 WHERE</strong>
+          In front of North Lobby<br>Pakubuwono Terrace
+        </div>
+        <div class="detail">
+          <strong>👕 DRESS CODE</strong>
+          Your comfiest outfit.
+        </div>
+      </div>
+
+      <div style="margin-top:28px;text-align:left;border:2px dashed var(--ink);border-radius:18px;padding:20px;background:#fff;">
+        <h3 style="font-size:28px;margin-bottom:16px;">THE ARRANGEMENT™</h3>
+        <p style="line-height:1.7;margin:0;">
+          🏠 <strong>Place:</strong> provided by the host.<br>
+          🍜 <strong>Food:</strong> bring your own or order online. we are adults. we can figure this out.<br>
+          ☕️ <strong>Coffee:</strong> I will bring coffee.<br>
+          <strong>My coffee.</strong><br>
+          <strong>For me.</strong><br>
+          hehehehe.
+        </p>
+      </div>
+    </section>
+
+    <section class="card question" id="question">
+      <span class="tiny">THE MOMENT OF TRUTH</span>
+      <h2>so.. <span class="pink">choose wisely 🙂</span></h2>
+      <p>Your answer will be judged. Not officially, but spiritually.</p>
+
+      <div class="buttons">
+        <button class="yes" onclick="sayYes()">🀄 IKUT DONG! GILA KALI.</button>
+        <button class="no" onclick="sayNo()">🥲 SORRY, GUE LAGI GA SERU. GA IKUT DULU.</button>
+      </div>
+    </section>
+
+    <section class="card result" id="yesResult">
+      <div class="big pink">emang orang mantep 🫵🏻</div>
+    </section>
+
+    <section class="card result" id="noResult">
+      <div class="big green">sorry salah aku. aku pikir kamu asik 🥺</div>
+      <button class="back" onclick="backToQuestion()">eh bentar... gue asik kok</button>
+    </section>
+
+    <div class="footer">thank you, widdy and aul</div>
+  </main>
+
+<script>
+  const question = document.getElementById('question');
+  const yesResult = document.getElementById('yesResult');
+  const noResult = document.getElementById('noResult');
+
+  function hideResults() {
+    yesResult.classList.remove('show');
+    noResult.classList.remove('show');
+    question.style.display = 'block';
+    question.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+
+  function sayYes() {
+    question.style.display = 'none';
+    noResult.classList.remove('show');
+    yesResult.classList.add('show');
+    yesResult.scrollIntoView({behavior:'smooth', block:'center'});
+    confetti();
+  }
+
+  function sayNo() {
+    question.style.display = 'none';
+    yesResult.classList.remove('show');
+    noResult.classList.add('show');
+    noResult.scrollIntoView({behavior:'smooth', block:'center'});
+    document.body.classList.add('dramatic');
+    setTimeout(() => document.body.classList.remove('dramatic'), 500);
+  }
+
+  function backToQuestion() {
+    hideResults();
+  }
+
+  function confetti() {
+    const bits = ['🀄','💗','✨','♡','🌸','🀙','🀆'];
+    for (let i=0; i<38; i++) {
+      const el = document.createElement('div');
+      el.className = 'confetti';
+      el.textContent = bits[Math.floor(Math.random()*bits.length)];
+      el.style.left = Math.random()*100 + 'vw';
+      el.style.animationDuration = (2.2 + Math.random()*2.5) + 's';
+      el.style.animationDelay = Math.random()*.4 + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 5200);
+    }
+  }
+</script>
+</body>
+</html>
